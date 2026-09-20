@@ -1,0 +1,101 @@
+# 列: 词	级别	建议替换	说明。级别 block=生造词/黑话，warn=口语过重或视上下文可用
+# 说明列写黑话对应的英文（及必要的适用范围），不写出现次数
+硬失败	block	直接判定整体失败	fail-fast / hard fail
+合法空	block	允许为空	valid empty / empty-is-ok
+半份	block	部分数据/不完整写入	partial / half record
+收场	block	处理结果/最终处理方式	disposition / wrap-up
+保旧	block	保留旧值	keep-old / preserve previous
+认版本	block	校验版本	version check / accept version
+空壳	block	空配置对象（仅有默认值）	empty shell
+老现场	block	存量系统/现有运行环境	brownfield / legacy site
+闸门	block	开关/暂停标志	gate
+一把读	block	一次性全量读取	read-all-at-once / bulk read
+要包	block	请求配置包	request package（领域黑话）
+实跑	block	实际运行验证	live run / real run
+收束	block	结束	wind down / converge
+黏性	block	固定持有	sticky
+搬家	block	迁移	migrate / move
+封账	block	写入最终记录并提交	finalize / close the books
+收口	block	统一收尾/汇总到一处	close out / wrap up
+扣住	block	拦截/暂存	hold / pin
+塌成	block	被覆盖合并成	collapse into
+在飞	block	进行中（尚未完成）	in-flight
+静默空转	block	静默跳过且无动作	silent no-op
+收编	block	并入/合并	absorb / fold in
+等待预算	block	等待时限	wait budget
+根因	block	根本原因	root cause
+收拢	block	归并	consolidate / gather
+比旧账	block	与旧值比对	diff against old
+病根	block	深层缺陷	root defect
+耐久订阅	block	持久订阅	durable subscription
+连坐	block	牵连/连带失败	cascade / guilt by association
+掉持	block	丢失持有权	lose lease / lose hold
+收摊	block	收尾清理并退出	pack up / wind down
+拍平	block	展开成单层/去掉嵌套	flatten
+播种	block	预置初始数据	seed
+带病	block	带着错误状态运行	run while broken
+回炉	block	重新处理	rework / reprocess
+彩排	block	预演（只演练不真正执行）	dry-run
+一把捞	block	一次性全部取出	fetch-all
+半拉子	block	半成品/不完整结果	half-baked
+进程编号文件	block	pid 文件	pid 的硬翻，应直接写 pid 文件
+暗桩	block	隐性依赖	hidden dependency / landmine
+一把梭	block	一次性全部提交	all-in / commit-all
+跟拍	block	本地缓存视图跟随更新	follow / mirror
+回绑	block	重新绑定	rebind
+尖兵	block	前置探针/试点	scout / canary / probe
+裸奔	block	无保护运行	unprotected / bare
+倒灌	block	反向套用	backflow / reverse apply
+上沉	block	上移到上层	push up / float up
+桥沉	block	由桥接层承接	sink into bridge
+吸进	block	并入	suck into / absorb
+掐死	block	强制终止	kill / choke off
+解掉	block	消除/解决	dissolve / remove
+接住	block	处理/承接	catch；会同时命中「稳稳接住」
+稳稳接住	block	正确处理	catch cleanly
+压实	block	确认落实	nail down / solidify
+按这条切	block	按此规则划分	cut along this line
+复用得很痛	block	复用困难	painful to reuse
+被打脸	block	与预期不符	proven wrong / face-slap
+先认	block	先承认（未经确认）	admit first
+拍脑袋	block	未经验证的判断	gut feel
+嘴炮	block	空谈	hot air / talk only
+吐出	block	输出/返回	spit out / emit
+切口	block	切分点	cut point / incision
+张力	block	冲突/矛盾	tension
+全场景正确	block	各场景均正确	correct in all scenarios
+决定性证据	block	充分证据	decisive evidence
+落到实处	block	落地执行	land in practice
+兜底	warn	默认处理/最后保障	fallback
+整份	warn	完整数据/整包	full record；与「半份」相对
+基线	warn	基准值	baseline；对照基准的正常用法需人工复核
+搬运	warn	复制/转移	copy / ferry
+口径	warn	定义/统计范围	definition / metric scope
+夹具	warn	测试样例/测试准备（视语境）	fixture；gtest 基类可用「测试基类」
+门控	warn	开关条件	gating
+拉平	warn	对齐	level / align
+闭环	warn	各步骤都做完并有结果	closed loop
+一票否决	warn	任一失败即整体失败	single veto
+归口	warn	统一归属管理	ownership / centralize
+爆炸半径	warn	影响范围	blast radius
+水位	warn	已处理进度标记	watermark；MQ 语境指消费进度
+落点	warn	核心目标/关注项	landing point / focus
+误伤	warn	错误影响无关项	collateral damage
+扇出	warn	分发到多个下游	fan-out
+瘦身	warn	精简	slim down
+回流	warn	反向引用/回退路径	backflow
+卡死	warn	阻塞不返回	hang / deadlock
+拉起	warn	启动（进程）	bring up / start
+堵住	warn	拦截/阻止	block
+兜住	warn	由默认处理覆盖	catch with fallback
+体检	warn	健康检查	health check
+拉通	warn	全流程协调	align end-to-end
+颗粒度	warn	粒度	granularity
+抓手	warn	切入点	handle / lever
+赋能	warn	提供能力	empower
+载荷	block	报文（或「数据部分」）	payload；用户指定禁用
+PoC	block	可行性验证/概念验证	Proof of Concept；用户指定禁用
+旋钮	block	开关 / 选项 / 配置项	knob；仅允许指物理旋钮
+全绿	block	全部通过 / 全部检查通过	all green；CI 黑话
+阴影	warn	顶替	shadow；CSS 视觉阴影不在此列
+遮蔽	warn	顶替 / 遮挡	shadowing；物理遮挡义不在此列
