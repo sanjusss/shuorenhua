@@ -52,6 +52,7 @@ sdk
 socket
 websocket
 eof
+gb
 # 系统与标识
 os
 cpu
@@ -105,6 +106,8 @@ docker
 k8s
 linux
 unix
+windows
+macos
 # 测试与质量
 ci
 cd
