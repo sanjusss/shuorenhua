@@ -99,3 +99,6 @@ PoC	block	可行性验证/概念验证	Proof of Concept；用户指定禁用
 全绿	block	全部通过 / 全部检查通过	all green；CI 黑话
 阴影	warn	顶替	shadow；CSS 视觉阴影不在此列
 遮蔽	warn	顶替 / 遮挡	shadowing；物理遮挡义不在此列
+咬人	block	会造成实际故障 / 会引发真实损失	比喻性口语（"会咬人的 bug"），讨论动物咬人不在此列
+较真	block	要求最严格 / 严格把关	口语（"最较真的一步"），描述人性格的日常义不在此列
+镀金	block	过度设计 / 超出需求的完善	gold-plating；金属加工本义不在此列
