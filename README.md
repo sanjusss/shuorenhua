@@ -63,8 +63,10 @@ OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型�
 方式一（推荐）：
 
 ```bash
-opencode plugin add github:sanjusss/shuorenhua#main
+opencode plugin add github:sanjusss/shuorenhua
 ```
+
+注意：不要在仓库地址后加 `#分支名`（如 `#main`）。加了分支名后，`npm` 会改用 `git` 的 `SSH` 协议拉取，需要配置 `GitHub` 的 `SSH` 密钥；不加则直接走 `HTTPS` 下载，无需任何凭证。更新执行 `opencode plugin update`，卸载执行 `opencode plugin remove github:sanjusss/shuorenhua`。
 
 方式二（手动配置）：把仓库克隆到任意位置，在全局配置 `~/.config/opencode/opencode.json` 的 `plugins` 数组里指向 `plugin/src` 目录：
 
