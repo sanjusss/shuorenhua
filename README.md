@@ -60,15 +60,23 @@ git clone https://github.com/sanjusss/shuorenhua.git .agents/skills/shuorenhua
 
 OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型调用的 `system` 末尾自动带上技能正文，发出的请求里每条用户消息末尾附加一句提醒。提醒只影响发给模型的内容，不写入消息历史，界面上不显示。本地没有该技能时，插件会用仓库内的文件自动注册。
 
-方式一（推荐）：
+方式一（推荐，npm 安装）：
+
+```bash
+opencode plugin add opencode-plugin-shuorenhua
+```
+
+安装后每次启动 OpenCode 自动解析到 npm 上的最新版，无需手动更新。仓库配置了 GitHub Actions：技能相关文件（`SKILL.md`、`data/`、`plugin/` 等）推送到 `master` 后自动发布新版到 npm，发布前会先跑机械检查，检查不通过就不发布。卸载执行 `opencode plugin remove opencode-plugin-shuorenhua`。
+
+方式二（GitHub 直装）：
 
 ```bash
 opencode plugin add github:sanjusss/shuorenhua
 ```
 
-注意：不要在仓库地址后加 `#分支名`（如 `#main`）。加了分支名后，`npm` 会改用 `git` 的 `SSH` 协议拉取，需要配置 `GitHub` 的 `SSH` 密钥；不加则直接走 `HTTPS` 下载，无需任何凭证。更新执行 `opencode plugin update`，卸载执行 `opencode plugin remove github:sanjusss/shuorenhua`。
+注意：不要在仓库地址后加 `#分支名`（如 `#main`）。加了分支名后，`npm` 会改用 `git` 的 `SSH` 协议拉取，需要配置 `GitHub` 的 `SSH` 密钥；不加则直接走 `HTTPS` 下载，无需任何凭证。这种方式不会自动更新，更新执行 `opencode plugin update`，卸载执行 `opencode plugin remove github:sanjusss/shuorenhua`。
 
-方式二（手动配置）：把仓库克隆到任意位置，在全局配置 `~/.config/opencode/opencode.json` 的 `plugins` 数组里指向 `plugin/src` 目录：
+方式三（手动配置）：把仓库克隆到任意位置，在全局配置 `~/.config/opencode/opencode.json` 的 `plugins` 数组里指向 `plugin/src` 目录：
 
 ```bash
 git clone https://github.com/sanjusss/shuorenhua.git ~/shuorenhua
