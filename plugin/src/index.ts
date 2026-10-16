@@ -34,28 +34,33 @@ export default Plugin.define({
       })
     })
 
-    // 二、每条用户消息末尾追加固定提醒句（随消息持久化）。
-    // prompt hook 抛错会阻止消息接纳，必须捕获后放行原消息。
-    await ctx.session.hook("prompt", (event) => {
-      try {
-        if (event.prompt.text.endsWith(REMINDER)) return
-        event.prompt.text += REMINDER
-      } catch {
-        // 放行原消息
-      }
-    })
-
-    // 三、每次主对话模型调用，把技能正文注入 `system` 末尾。
-    // 注意：`list()` 返回 `{ location, data }`，技能列表在 `data` 字段。
-    // context hook 抛错会导致整个会话失败，必须捕获后跳过本次注入。
+    // 二、每次主对话模型调用做两件事。这两处修改只影响当次发出的请求，
+    // 不进持久化历史，用户界面显示的消息是原文。
+    // context hook 抛错会导致整个会话失败，必须捕获后跳过。
     await ctx.session.hook("context", async (event) => {
+      // 1. 技能正文注入 `system` 末尾
       try {
+        // 注意：`list()` 返回 `{ location, data }`，技能列表在 `data` 字段
         const result = (await ctx.skill.list()) as { data?: { id?: string; content?: string }[] }
         const skill = (result.data ?? []).find((s) => s.id === SKILL_ID)
         if (!skill?.content) return
         event.system.push({ type: "text", text: `${HEADER}\n\n${skill.content}` })
       } catch {
         // 跳过本次注入
+      }
+
+      // 2. 提醒句追加到请求里的所有用户消息。每次调用都做同样的追加，
+      // 同一条消息在多次调用间渲染一致，前缀缓存才能命中。
+      try {
+        for (const message of event.messages) {
+          if (message.role !== "user") continue
+          const parts = message.content as { type?: string; text?: string }[]
+          const lastText = [...parts].reverse().find((p) => p.type === "text" && typeof p.text === "string")
+          if (lastText) lastText.text += REMINDER
+          else parts.push({ type: "text", text: REMINDER })
+        }
+      } catch {
+        // 跳过本次追加
       }
     })
   },

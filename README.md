@@ -58,7 +58,7 @@ git clone https://github.com/sanjusss/shuorenhua.git .agents/skills/shuorenhua
 
 ### OpenCode 插件（自动注入）
 
-OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型调用的 `system` 末尾自动带上技能正文，每条用户消息末尾自动附加一句提醒；本地没有该技能时，插件会用仓库内的文件自动注册。
+OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型调用的 `system` 末尾自动带上技能正文，发出的请求里每条用户消息末尾附加一句提醒。提醒只影响发给模型的内容，不写入消息历史，界面上不显示。本地没有该技能时，插件会用仓库内的文件自动注册。
 
 方式一（推荐）：
 
