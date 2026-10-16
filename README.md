@@ -56,6 +56,30 @@ git clone https://github.com/sanjusss/shuorenhua.git .agents/skills/shuorenhua
 
 把项目里的 `.agents/skills/shuorenhua` 提交进 Git 后，同事克隆仓库即可共用，无需各自再装。
 
+### OpenCode 插件（自动注入）
+
+OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型调用的 `system` 末尾自动带上技能正文，每条用户消息末尾自动附加一句提醒；本地没有该技能时，插件会用仓库内的文件自动注册。
+
+方式一（推荐）：
+
+```bash
+opencode plugin add github:sanjusss/shuorenhua#main
+```
+
+方式二（手动配置）：把仓库克隆到任意位置，在全局配置 `~/.config/opencode/opencode.json` 的 `plugins` 数组里指向 `plugin/src` 目录：
+
+```bash
+git clone https://github.com/sanjusss/shuorenhua.git ~/shuorenhua
+```
+
+```jsonc
+{
+  "plugins": ["/home/你的用户名/shuorenhua/plugin/src"]
+}
+```
+
+注意：配置里的路径必须是包含 `index.ts` 的目录（即 `plugin/src`）。指向仓库根不会生效，当前版本不解析 `package.json` 的入口字段。
+
 ### 安装后自检
 
 确认路径正确：

@@ -1,0 +1,12 @@
+{
+  "name": "opencode-plugin-shuorenhua",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./plugin/src/index.ts"
+  },
+  "main": "./plugin/src/index.ts",
+  "dependencies": {
+    "@opencode/plugin": "latest"
+  }
+}
