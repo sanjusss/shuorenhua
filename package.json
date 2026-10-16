@@ -1,11 +1,31 @@
 {
   "name": "opencode-plugin-shuorenhua",
   "version": "1.0.0",
+  "description": "OpenCode 插件：自动注入 shuorenhua 中文写作规则（技能正文进 system，每条用户消息附加提醒句）",
   "type": "module",
   "exports": {
     ".": "./plugin/src/index.ts"
   },
   "main": "./plugin/src/index.ts",
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "data/",
+    "scripts/",
+    "plugin/",
+    "!scripts/__pycache__"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "chinese",
+    "writing",
+    "skill"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjusss/shuorenhua.git"
+  },
   "dependencies": {
     "@opencode/plugin": "latest"
   }

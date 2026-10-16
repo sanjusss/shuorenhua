@@ -1,0 +1,60 @@
+# 发布工作流：push 技能相关文件到 master 后，自动发布到 npm。
+# 链路：发布前检查（词表质量）→ 版本号 +0.0.1 → npm publish → 版本号提交回仓库。
+# 接收方用不固定版本的 npm 引用安装（opencode plugin add opencode-plugin-shuorenhua），
+# 重启 OpenCode 时自动解析到最新版。
+name: publish
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "SKILL.md"
+      - "README.md"
+      - "data/**"
+      - "scripts/**"
+      - "plugin/**"
+      - "package.json"
+
+# 版本号回写仓库需要写权限；显式声明，不依赖仓库的默认权限设置
+permissions:
+  contents: write
+
+# 连续 push 时取消旧的运行，只发布最新状态（中间版本不需要单独发）
+concurrency:
+  group: publish
+  cancel-in-progress: true
+
+jobs:
+  # 第一步：发布前检查。check_text.py 命中 BLOCK 时退出码为 1，本任务失败，
+  # publish 不会执行。只检查 README.md（对外文档）；
+  # SKILL.md 是规则源文件，正文里引用禁止词示例，不能作为检查对象
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 运行中文写作规则机械检查
+        run: python3 scripts/check_text.py README.md
+
+  # 第二步：发布
+  publish:
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - name: 版本号 +0.0.1
+        run: npm version patch --no-git-tag-version
+      - name: 发布到 npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: 版本号提交回仓库
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: bump version [skip ci]"
+          git push
