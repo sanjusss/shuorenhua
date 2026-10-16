@@ -66,7 +66,9 @@ OpenCode V2 用户可以安装本仓库自带的插件。装好后每次模型�
 opencode plugin add opencode-plugin-shuorenhua
 ```
 
-安装后每次启动 OpenCode 自动解析到 npm 上的最新版，无需手动更新。仓库配置了 GitHub Actions：技能相关文件（`SKILL.md`、`data/`、`plugin/` 等）推送到 `master` 后自动发布新版到 npm，发布前会先跑机械检查，检查不通过就不发布。卸载执行 `opencode plugin remove opencode-plugin-shuorenhua`。
+安装和更新走 npm 渠道：更新执行 `opencode plugin update`，卸载执行 `opencode plugin remove opencode-plugin-shuorenhua`。仓库配置了 GitHub Actions：技能相关文件（`SKILL.md`、`data/`、`plugin/` 等）推送到 `master` 后自动发布新版到 npm，发布前会先跑机械检查，检查不通过就不发布。
+
+注意：OpenCode 启动时不会自动拉取新版（只读本地缓存），需要手动执行 `opencode plugin update`。想要全自动更新，可以再装一个社区的 `opencode-plugin-auto-update` 插件（它会在启动时后台检查并安装 npm 插件的更新），或者用系统定时任务周期执行 `opencode plugin update`。
 
 方式二（GitHub 直装）：
 
