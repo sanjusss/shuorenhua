@@ -43,6 +43,7 @@ tcp
 udp
 ip
 dns
+hostname
 url
 uri
 ssl
@@ -125,6 +126,7 @@ redis
 pulsar
 kafka
 mqtt
+topic
 zookeeper
 etcd
 mysql

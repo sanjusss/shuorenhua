@@ -151,7 +151,7 @@ def check_line(line, rules, max_len):
         near_cjk = (i >= 0 and CJK_ADJ_RE.match(line[i])) or (j < len(line) and CJK_ADJ_RE.match(line[j]))
         if near_cjk:
             seen.add(word)
-            issues.append(("warn", CAT_MIX, word, "不在白名单：文件名/标识符/命令名可用反引号包裹（行内代码不检查）；术语首次出现时加中文解释，或改用通行中文说法；不要自行加入白名单，确属通行术语请向用户建议"))
+            issues.append(("warn", CAT_MIX, word, "不在白名单：文件名/标识符/命令名可用反引号包裹（行内代码不检查）；沿用用户和项目术语，仅对目标读者不熟悉且必要的术语加解释；不要自行加入白名单，确属通行术语请向用户建议"))
     return issues
 
 
