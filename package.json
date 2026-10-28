@@ -1,6 +1,6 @@
 {
   "name": "opencode-plugin-shuorenhua",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "OpenCode 插件：自动注入 shuorenhua 中文写作规则（技能正文进 system，每条用户消息附加提醒句）",
   "type": "module",
   "exports": {
